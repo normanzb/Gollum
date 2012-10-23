@@ -32,11 +32,11 @@ module.exports = function(grunt) {
 			dist : {
 				options : {
 					out : "<config:meta.dist.max>",
-					baseUrl : "src",
+					baseUrl : "./src/",
 					paths : {
 						"jquery" : "empty:"
 					},
-					main: './src/gollum.js',
+					name: 'gollum',
 					optimize : "none"
 				}
 			}
@@ -60,7 +60,7 @@ module.exports = function(grunt) {
 				file : "<config:meta.dist.max>",
 				description : "Gollum - <%= meta.version %>"
 			},
-			"troopjs-bundle.min.js" : {
+			"gollum.min.js" : {
 				repo : "ETUI/Gollum",
 				auth : "<%= [ meta.auth.username, meta.auth.password ].join(':') %>",
 				file : "<config:meta.dist.min>",
