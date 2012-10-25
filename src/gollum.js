@@ -117,7 +117,13 @@ define(['jquery'], function TrackerGollum($){
 
             window.__gollumArgs__.push(Array.prototype.slice.call(args));
 
-            ret.resolve(window.eval(
+            var myEval = window.eval;
+
+            if (!myEval){
+                myEval = window.execScript;
+            }
+
+            ret.resolve(myEval(
                 '(' + sSource + ').apply(this, this.__gollumArgs__.shift());'
             ));
         });
