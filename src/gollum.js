@@ -117,15 +117,19 @@ define(['jquery'], function TrackerGollum($){
 
             window.__gollumArgs__.push(Array.prototype.slice.call(args));
 
-            var myEval = window.eval;
+            var code = 'this.__gollumRet__ = (' + 
+                    sSource + 
+                    ').apply(this, this.__gollumArgs__.shift());';
 
-            if (!myEval){
-                myEval = window.execScript;
+            if (window.execScript){
+                // keep direct call to execScript, otherwise code will fail on ie8
+                window.execScript(code);
+            }
+            else{
+                window.eval(code)
             }
 
-            ret.resolve(myEval(
-                '(' + sSource + ').apply(this, this.__gollumArgs__.shift());'
-            ));
+            ret.resolve(window.__gollumRet__);
         });
 
         return ret;
