@@ -1,0 +1,10 @@
+{
+  "name": "gollum",
+  "version": "0.0.1",
+  "main": "src/gollum.js",
+  "description": "Load or execute script under sandboxed execution context to isolate untrusted code.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/normanzb/Gollum"
+  }
+}
