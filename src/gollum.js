@@ -32,7 +32,7 @@ define(['jquery'], function TrackerGollum($){
 
         // It creates the iframe which contains the dirty scripts.
         var $gollum = (function createGollum(){
-        
+
             var ret = $(document.createElement('iframe'));
 
             ret.attr('src', me.opts.url);
@@ -45,11 +45,11 @@ define(['jquery'], function TrackerGollum($){
 
         })();
 
-        me._$gollum = $gollum;
+        me.$gollum = $gollum;
 
-        // It also make sure that all operation are done after iframe 
+        // It also make sure that all operation are done after iframe
         // is properly loaded
-        me._$gollum.bind('load', function(){
+        me.$gollum.bind('load', function(){
             $gollum[0].contentWindow.__gollumArgs__ = [];
             me.ready.resolve();
         });
@@ -64,7 +64,7 @@ define(['jquery'], function TrackerGollum($){
      */
     p.load = function(path){
         if (!path){
-            throw EX_NO_ARG; 
+            throw EX_NO_ARG;
         }
 
         var me = this;
@@ -72,7 +72,7 @@ define(['jquery'], function TrackerGollum($){
 
         me.ready.done(function(){
 
-            var window = this._$gollum[0].contentWindow;
+            var window = me.$gollum[0].contentWindow;
             var doc = window.document;
             var script = doc.createElement('script');
 
@@ -113,14 +113,14 @@ define(['jquery'], function TrackerGollum($){
         var args = Array.prototype.slice.call(arguments, 1);
 
         me.ready.done(function(){
-            var window = me._$gollum[0].contentWindow;
+            var window = me.$gollum[0].contentWindow;
             var document = window.document;
 
             window.__gollumArgs__.push(Array.prototype.slice.call(args));
 
-            var code = 'this.__gollumRet__ = (' + 
-                    sSource + 
-                    ').apply(this, this.__gollumArgs__.shift());';
+            var code = 'this.__gollumRet__ = (' +
+                sSource +
+                ').apply(this, this.__gollumArgs__.shift());';
             try{
                 if (window.execScript){
                     // keep direct call to execScript, otherwise code will fail on ie8
