@@ -132,7 +132,7 @@ define(['jquery'], function TrackerGollum($){
             }
             catch(ex){
                 setTimeout(function(){
-                    throw EX_EXE_FAIL + ' code:' + code;
+                    throw EX_EXE_FAIL + ': ' + ex + ' code:' + code;
                 },0);
             }
 
